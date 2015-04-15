@@ -364,5 +364,25 @@ public class DbOperations {
             session.close() ;
         }
     }
+    
+    public void updateUser(int userID, String fName, String lName, String mName){
+        Session session = HibernateUtil.getSessionFactory().openSession() ;
+        Transaction tx = null ;
+        try{
+            tx = session.beginTransaction() ;
+            User user = (User)session.get(User.class, userID) ;
+            user.setFirstName(fName);
+            user.setLastName(lName);
+            user.setMiddleName(mName);
+            session.update(user);
+            tx.commit();
+        }catch (HibernateException e){
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        }finally{
+            session.close() ;
+        }
+    }
 
 }
