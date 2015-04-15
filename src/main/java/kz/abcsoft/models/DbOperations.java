@@ -1,5 +1,7 @@
 package kz.abcsoft.models;
 
+import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 import kz.abcsoft.utils.HibernateUtil;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -289,6 +291,7 @@ public class DbOperations {
             String hql = "From User" ;
             Query query = session.createQuery(hql) ;
             result = query.list() ;
+            tx.commit();
         }catch (HibernateException e){
             if( tx != null)
                 tx.rollback();
@@ -299,4 +302,49 @@ public class DbOperations {
         return  result ;
     }
     
+    public boolean isAuthenticate(String mail, String password){
+        Session session = HibernateUtil.getSessionFactory().openSession() ;
+        Transaction tx = null ;
+        String userHashPassword = null ;
+        List<User> result = null ;
+        boolean is_auth = false ;
+        try{
+            tx = session.beginTransaction() ;
+            
+            userHashPassword = DigestUtils.md5Hex(password) ;
+            
+            String hql = "From User where email = :em" ;
+            Query query = session.createQuery(hql );
+            query.setParameter("em", mail) ;
+            result = query.list() ;
+            
+            for (User u : result){
+                if ( (mail.equalsIgnoreCase( u.getEmail() ) && 
+                    userHashPassword.equals( u.getPassword()))){
+                is_auth = true ;
+                return is_auth ;
+            }
+            else{
+                is_auth = false ;
+                return is_auth ;
+            }
+            }
+            
+            tx.commit();
+            for (Iterator it = result.iterator(); it.hasNext();) {
+                String o = (String)it.next();
+                System.out.println(o + "---");
+            }
+               return true ;
+        }catch (HibernateException e){
+            if(tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        }finally{
+            session.close() ;
+        }
+        return is_auth ;
+        
+    }
+
 }

@@ -30,6 +30,10 @@ public class TestApp {
 //        List<User> userList = db.getUserList() ;
 //        for (User u : userList)
 //            System.out.println(u.getFirstName() + " " + u.getEmail());
+        
+        String userEmail = "kairo@yahoo.com" ;
+        String userPassword = "456" ;
+        System.out.println("is_auth = " + db.isAuthenticate(userEmail, userPassword));
     } 
     
 }
