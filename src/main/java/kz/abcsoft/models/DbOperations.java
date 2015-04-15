@@ -346,5 +346,23 @@ public class DbOperations {
         return is_auth ;
         
     }
+    
+    public void updateCityOrRegion(int cityID, String newCityName){
+        Session session = HibernateUtil.getSessionFactory().openSession() ;
+        Transaction tx = null ;
+        try{
+            tx = session.beginTransaction() ;
+            CityOrRegion city = (CityOrRegion)session.get(CityOrRegion.class, cityID) ;
+            city.setCity_or_region_name(newCityName);
+            session.update(city);
+            tx.commit();
+        }catch (HibernateException e){
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        }finally{
+            session.close() ;
+        }
+    }
 
 }
