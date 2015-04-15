@@ -2,6 +2,7 @@ package kz.abcsoft.test;
 
 import java.util.List;
 import kz.abcsoft.models.DbOperations;
+import kz.abcsoft.models.User;
 
 public class TestApp {
     
@@ -23,8 +24,12 @@ public class TestApp {
 //            int id5 = db.getCityOrRegionID("Astana") ;
 //            System.out.println("id = " + id5);
         
-          int id6 = db.getUserID("dau@gmail.com") ;
-            System.out.println("id = " + id6);
+//          int id6 = db.getUserID("dau@gmail.com") ;
+//            System.out.println("id = " + id6);
+        
+//        List<User> userList = db.getUserList() ;
+//        for (User u : userList)
+//            System.out.println(u.getFirstName() + " " + u.getEmail());
     } 
     
 }

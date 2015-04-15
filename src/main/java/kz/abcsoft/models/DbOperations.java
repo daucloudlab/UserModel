@@ -260,4 +260,43 @@ public class DbOperations {
         }
         return  (int)result.get(0) ;
     }
+    
+    public List getCityOrRegionList(){
+        Session session = HibernateUtil.getSessionFactory().openSession() ;
+        Transaction tx = null ;
+        List result = null ;
+        try{
+            tx = session.beginTransaction() ;
+            String hql = "From CityOrRegion" ;
+            Query query = session.createQuery(hql) ;
+            result = query.list() ;
+        }catch (HibernateException e){
+            if( tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        }finally{
+            session.close();
+        }
+        return  result ;
+    }
+    
+    public List getUserList(){
+        Session session = HibernateUtil.getSessionFactory().openSession() ;
+        Transaction tx = null ;
+        List result = null ;
+        try{
+            tx = session.beginTransaction() ;
+            String hql = "From User" ;
+            Query query = session.createQuery(hql) ;
+            result = query.list() ;
+        }catch (HibernateException e){
+            if( tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        }finally{
+            session.close();
+        }
+        return  result ;
+    }
+    
 }
