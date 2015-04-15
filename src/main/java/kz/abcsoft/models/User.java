@@ -23,7 +23,7 @@ public class User {
         
         this.isActive = false ;
     }
-    public User(String firstName, String lastName, String password, String email, 
+    public User(String firstName, String lastName,  String email, String password, 
             CityOrRegion cityOrRegion){
         this.firstName = firstName ;
         this.lastName = lastName ;
@@ -33,8 +33,8 @@ public class User {
         
         this.isActive = false ;
     }
-    public User(String firstName, String lastName, String middleName, String password, 
-            String email, CityOrRegion cityOrRegion){
+    public User(String firstName, String lastName, String middleName,  
+            String email, String password, CityOrRegion cityOrRegion){
         this.firstName = firstName ;
         this.lastName = lastName ;
         this.middleName = middleName ;
@@ -45,8 +45,8 @@ public class User {
         this.isActive = false ;
     }
     
-    public User(String firstName, String lastName, String middleName, String password, 
-            String email, CityOrRegion cityOrRegion, String phone, String Iin_Bin){
+    public User(String firstName, String lastName, String middleName,  
+            String email, String password, CityOrRegion cityOrRegion, String phone, String Iin_Bin){
         this.firstName = firstName ;
         this.lastName = lastName ;
         this.middleName = middleName ;

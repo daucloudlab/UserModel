@@ -28,7 +28,7 @@ public class DbOperations {
         return cityID ;
     }
     
-    public int addCityOrRegion(String newCityName){
+    public CityOrRegion addCityOrRegion(String newCityName){
         Session session = HibernateUtil.getSessionFactory().openSession() ;
         Transaction tx = null ;
         Integer cityID = null ;
@@ -44,7 +44,7 @@ public class DbOperations {
         }finally{
             session.close() ;
         }
-        return cityID ;
+        return cityName ;
     }
     
     public int addUser(User user){
@@ -88,4 +88,26 @@ public class DbOperations {
         }
         return userID ;
     }
+    
+    public int addUser(String firstName, String lastName, String email, String password, 
+            CityOrRegion newCity){
+        Session session = HibernateUtil.getSessionFactory().openSession() ;
+        Transaction tx = null ;
+        Integer userID = null ;
+        String md5Password  = DigestUtils.md5Hex(password) ;
+        User user = new User(firstName, lastName, email, md5Password, newCity  );
+        try{
+            tx = session.beginTransaction() ;
+            userID = (Integer)session.save(user) ;
+            tx.commit() ;
+        }catch (HibernateException e){
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        }finally{
+            session.close();
+        }
+        return userID ;
+    }
+    
 }
