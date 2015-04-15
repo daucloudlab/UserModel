@@ -409,5 +409,41 @@ public class DbOperations {
             session.close() ;
         }
     }
+        
+        public void updateUserCity(int userID, String newCity){
+        Session session = HibernateUtil.getSessionFactory().openSession() ;
+        Transaction tx = null ;
+        try{
+            tx = session.beginTransaction() ;
+            User user = (User)session.get(User.class, userID) ;
+            CityOrRegion city = new CityOrRegion(newCity) ;
+            user.setCityOrRegion(city);
+            session.update(user);
+            tx.commit();
+        }catch (HibernateException e){
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        }finally{
+            session.close() ;
+        }
+    }
 
+        public void updateUserPhone(int userID, String newPhone){
+        Session session = HibernateUtil.getSessionFactory().openSession() ;
+        Transaction tx = null ;
+        try{
+            tx = session.beginTransaction() ;
+            User user = (User)session.get(User.class, userID) ;
+            user.setPhone(newPhone);
+            session.update(user);
+            tx.commit();
+        }catch (HibernateException e){
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        }finally{
+            session.close() ;
+        }
+    }
 }

@@ -35,9 +35,11 @@ public class TestApp {
 //        String userPassword = "456" ;
 //        System.out.println("is_auth = " + db.isAuthenticate(userEmail, userPassword));
         
-        int userId = db.getUserID("kairo@yahoo.com") ;
-        db.updateUser(userId, "Marat", "Ajimuratov", "Ermakhanovich", "elmario@mail.ru", 
-                "Mara89");
+//        int userId = db.getUserID("kairo@yahoo.com") ;
+//        db.updateUser(userId, "Marat", "Ajimuratov", "Ermakhanovich", "elmario@mail.ru", 
+//                "Mara89");
+        
+        db.updateUserPhone(db.getUserID("dau@gmail.com"), "+77078914322");
     } 
     
 }
