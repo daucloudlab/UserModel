@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="kz.abcsoft.models.User" table="user">
+      <id name="id" column="id" type="integer">
+          <generator class="native" />
+      </id>
+      <many-to-one name="cityOrRegion" column="city_or_region_id" cascade="all" 
+                   class="kz.abcsoft.models.CityOrRegion" />
+      <property name="firstName" column="first_name" type="string" />
+      <property name = "lastName" column="last_name" type="string" />
+      <property name = "middleName" column="middle_name" type="string" />
+      <property name = "email" column="email" type="string" />
+      <property name = "password" column="password" type="string" />
+      <property name = "Iin_Bin" column="IIN_BIN" type="string" />
+      <property name = "phone" column="phone" type = "string" />
+      <property name = "isActive" column="is_active" type = "boolean" />
+      
+  </class>
+</hibernate-mapping>
