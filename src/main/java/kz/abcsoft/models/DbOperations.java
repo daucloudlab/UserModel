@@ -1,6 +1,7 @@
 package kz.abcsoft.models;
 
 import kz.abcsoft.utils.HibernateUtil;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -50,6 +51,8 @@ public class DbOperations {
         Session session = HibernateUtil.getSessionFactory().openSession() ;
         Transaction tx = null ;
         Integer userID = null ;
+        String md5Password = DigestUtils.md5Hex(user.getPassword()) ;
+        user.setPassword(md5Password);
         try{
             tx = session.beginTransaction() ;
             userID = (Integer)session.save(user) ;
@@ -70,7 +73,8 @@ public class DbOperations {
         Session session = HibernateUtil.getSessionFactory().openSession() ;
         Transaction tx = null ;
         Integer userID = null ;
-        User user = new User(firstName, lastName, email, password  );
+        String md5Password  = DigestUtils.md5Hex(password) ;
+        User user = new User(firstName, lastName, email, md5Password  );
         try{
             tx = session.beginTransaction() ;
             userID = (Integer)session.save(user) ;

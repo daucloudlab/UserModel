@@ -15,11 +15,11 @@ public class User {
     private CityOrRegion cityOrRegion ;
     
     public User(){}
-    public User(String firstName, String lastName, String password, String email){
+    public User(String firstName, String lastName,  String email, String password){
         this.firstName = firstName ;
         this.lastName = lastName ;
-        this.password = password ;
         this.email = email ;
+        this.password = password ;
         
         this.isActive = false ;
     }
