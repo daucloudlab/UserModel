@@ -365,7 +365,7 @@ public class DbOperations {
         }
     }
     
-    public void updateUser(int userID, String fName, String lName, String mName){
+    public void updateUserNames(int userID, String fName, String lName, String mName){
         Session session = HibernateUtil.getSessionFactory().openSession() ;
         Transaction tx = null ;
         try{
@@ -374,6 +374,31 @@ public class DbOperations {
             user.setFirstName(fName);
             user.setLastName(lName);
             user.setMiddleName(mName);
+            session.update(user);
+            tx.commit();
+        }catch (HibernateException e){
+            if (tx != null)
+                tx.rollback();
+            e.printStackTrace();
+        }finally{
+            session.close() ;
+        }
+    }
+        
+        public void updateUser(int userID, String fName, String lName, String mName,
+                String mail, String passwd){
+        Session session = HibernateUtil.getSessionFactory().openSession() ;
+        Transaction tx = null ;
+        String hashPasswd = null ;
+        try{
+            tx = session.beginTransaction() ;
+            User user = (User)session.get(User.class, userID) ;
+            user.setFirstName(fName);
+            user.setLastName(lName);
+            user.setMiddleName(mName);
+            user.setEmail(mail);
+            hashPasswd = DigestUtils.md5Hex(passwd) ;
+            user.setPassword(hashPasswd);
             session.update(user);
             tx.commit();
         }catch (HibernateException e){
