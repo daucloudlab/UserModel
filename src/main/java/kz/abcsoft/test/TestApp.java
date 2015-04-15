@@ -1,6 +1,6 @@
 package kz.abcsoft.test;
 
-import kz.abcsoft.models.CityOrRegion;
+import java.util.List;
 import kz.abcsoft.models.DbOperations;
 
 public class TestApp {
@@ -14,9 +14,17 @@ public class TestApp {
 //        System.out.println("id2 = " + id2);
         
 //        int id3 = db.addUser("Daulet", "Baimbetov", "dau@gmail.com", "12345") ;
-        CityOrRegion city = db.addCityOrRegion("Karaganda") ;
-        int id4 = db.addUser("Kairat", "Almakhanov", "kairo@yahoo.com", "456", city);
-        System.out.println("id3 = " + id4);
+//        CityOrRegion city = db.addCityOrRegion("Karaganda") ;
+//        int id4 = db.addUser("Kairat", "Almakhanov", "kairo@yahoo.com", "456", city);
+      
+//        List l = db.getCityOrRegionID("Astana") ;
+//        System.out.println("id = " + l.get(0));
+      
+//            int id5 = db.getCityOrRegionID("Astana") ;
+//            System.out.println("id = " + id5);
+        
+          int id6 = db.getUserID("dau@gmail.com") ;
+            System.out.println("id = " + id6);
     } 
     
 }
